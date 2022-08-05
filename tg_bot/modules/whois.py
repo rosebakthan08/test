@@ -72,23 +72,23 @@ def whois(bot: Bot, update: Update, args: List[str]):
    
 
     if user.id == OWNER_ID:
-        text += "\nError"
+        text += "\nsudo"
         
     elif user.id in DEV_USERS:
-        text += "\nError"
+        text += "\nsudo"
         
     elif user.id in SUDO_USERS:
-        text += "\nError" \
+        text += "\nsudo" \
                     "Poop on his head."
         
     elif user.id in SUPPORT_USERS:
-        text += "\nping" \
+        text += "\nsudo" \
                         "Eat shit lol"
         
   
        
     elif user.id in WHITELIST_USERS:
-        text += "\nError! " \
+        text += "\nsafe play" \
                         "404"
     
     
