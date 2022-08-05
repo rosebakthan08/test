@@ -1,6 +1,6 @@
 from os import environ
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, User, ChatJoinRequest
+from pyrogram.types import InlineKeyboardMarkup, Message, ChatJoinRequest
 
 lucido=Client(
     "Auto Approved Bot",
