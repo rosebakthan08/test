@@ -44,20 +44,54 @@ def whois(bot: Bot, update: Update, args: List[str]):
         return
     
     text = (f"<b>User Information:</b>\n"
-            f"ID: <code>{user.id}</code>\n"
-            f"Name: {html.escape(user.first_name)}")
+            f"🆔: <code>{user.id}</code>\n"
+            f"👤Name: {html.escape(user.first_name)}")
+
+    if user.last_name:
+        text += f"\n🚹Last Name: {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\nUsername: @{html.escape(user.username)}"
+        text += f"\n♻️Username: @{html.escape(user.username)}"
 
-    text += f"\n user link: {mention_html(user.id, 'link')}"
+    text += f"\n☣️Permanent user link: {mention_html(user.id, 'link🚪')}"
 
     num_chats = sql.get_user_num_chats(user.id)
-    text += f"\nChat count: <code>{num_chats}</code>"
+    text += f"\n🌐Chat count: <code>{num_chats}</code>"
+    text += "\n🎭Number of profile pics: {}".format(bot.get_user_profile_photos(user.id).total_count)
+   
     try:
         user_member = chat.get_member(user.id)
+        if user_member.status == 'administrator':
+            result = requests.post(f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}")
+            result = result.json()["result"]
+            if "custom_title" in result.keys():
+                custom_title = result['custom_title']
+                text += f"\n🛡This user holds the title⚜️ <b>{custom_title}</b> here."
     except BadRequest:
         pass
+
+   
+
+    if user.id == OWNER_ID:
+        text += "\n🚶🏻‍♂️Uff,This person is my Owner🤴\nI would never do anything against him!."
+        
+    elif user.id in DEV_USERS:
+        text += "\n🚴‍♂️Pling,This person is my dev🤷‍♂️\nI would never do anything against him!."
+        
+    elif user.id in SUDO_USERS:
+        text += "\n🚴‍♂️Pling,This person is one of my sudo users! " \
+                    "Nearly as powerful as my owner🕊so watch it.."
+        
+    elif user.id in SUPPORT_USERS:
+        text += "\n🚴‍♂️Pling,This person is one of my support users! " \
+                        "Not quite a sudo user, but can still gban you off the map."
+        
+  
+       
+    elif user.id in WHITELIST_USERS:
+        text += "\n🚴‍♂️Pling,This person has been whitelisted! " \
+                        "That means I'm not allowed to ban/kick them."
+    
 
 
     text +="\n"
@@ -74,6 +108,12 @@ def whois(bot: Bot, update: Update, args: List[str]):
             mod_info = mod.__user_info__(user.id, chat.id)
         if mod_info:
             text += "\n" + mod_info
-    
+    try:
+        profile = bot.get_user_profile_photos(user.id).photos[0][-1]
+        bot.sendChatAction(chat.id, "upload_photo")
+        bot.send_photo(chat.id, photo=profile, caption=(text), parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    except IndexError:
+        update.effective_message.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+
 WHOIS_HANDLER = DisableAbleCommandHandler("whois", whois, pass_args=True)
 dispatcher.add_handler(WHOIS_HANDLER)
