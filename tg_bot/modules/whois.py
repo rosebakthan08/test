@@ -72,13 +72,13 @@ def whois(bot: Bot, update: Update, args: List[str]):
    
 
     if user.id == OWNER_ID:
-        text += "\nError ."
+        text += "\nError"
         
     elif user.id in DEV_USERS:
-        text += "\nError."
+        text += "\nError"
         
     elif user.id in SUDO_USERS:
-        text += "\nError " \
+        text += "\nError" \
                     "Poop on his head."
         
     elif user.id in SUPPORT_USERS:
@@ -89,24 +89,8 @@ def whois(bot: Bot, update: Update, args: List[str]):
        
     elif user.id in WHITELIST_USERS:
         text += "\nError! " \
-                        "404."
+                        "404"
     
-
-
-    text +="\n"
-    text += "\nCAS banned: "
-    result = cas.banchecker(user.id)
-    text += str(result)
-    for mod in USER_INFO:
-        if mod.__mod_name__ == "WHOIS":
-            continue
-
-        try:
-            mod_info = mod.__user_info__(user.id)
-        except TypeError:
-            mod_info = mod.__user_info__(user.id, chat.id)
-        if mod_info:
-            text += "\n" + mod_info
     try:
         profile = bot.get_user_profile_photos(user.id).photos[0][-1]
         bot.sendChatAction(chat.id, "upload_photo")
