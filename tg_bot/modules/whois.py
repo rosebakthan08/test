@@ -90,7 +90,7 @@ def whois(bot: Bot, update: Update, args: List[str]):
 
      try:
         profile = bot.get_user_profile_photos(user.id).photos[0][-1]
-        bot.sendChatAction(chat.id, "upload")
+        bot.sendChatAction(chat.id, "upload_Photo")
         bot.send_photo(chat.id, photo=profile, caption=(text), parse_mode=ParseMode.HTML, disable_web_page_preview=True)
  except IndexError:
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
