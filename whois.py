@@ -75,5 +75,5 @@ def whois(bot: Bot, update: Update, args: List[str]):
         if mod_info:
             text += "\n" + mod_info
     
-WHOIS_HANDLER = DisableAbleCommandHandler("info", whois, pass_args=True)
+WHOIS_HANDLER = DisableAbleCommandHandler("whois", whois, pass_args=True)
 dispatcher.add_handler(WHOIS_HANDLER)
