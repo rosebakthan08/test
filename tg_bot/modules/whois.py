@@ -90,6 +90,11 @@ def whois(bot: Bot, update: Update, args: List[str]):
     elif user.id in WHITELIST_USERS:
         text += "\nsafe play" \
                         "404"
+
+
+ except IndexError:
+        update.effective_message.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+
     
     
 
