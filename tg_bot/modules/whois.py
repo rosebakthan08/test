@@ -4,6 +4,7 @@ from pyrogram import filters
 from pyrogram.types import User, Message
 from pyrogram.raw import functions
 from pyrogram.errors import PeerIdInvalid
+from tg_bot import kp
 
 def ReplyCheck(message: Message):
     reply_id = None
