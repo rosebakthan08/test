@@ -106,39 +106,13 @@
          "description": "A space separated list of user IDs who you want to assign as whitelisted - can't be banned with your bot.",
          "required": false,
          "value": "1100231654"
-     },
-     "API_ID": {
-            "description": "Your APP ID From https://youtu.be/5eEsvLAKVc0 or @MT_MyTelegramOrg_Bot",
-            "value": ""
-        },
-        "API_HASH": {
-            "description": "Your API Hash From https://youtu.be/5eEsvLAKVc0 or @MT_MyTelegramOrg_Bot",
-            "value": ""
-        },
-         "CHAT_ID": {
-            "description": "Working Group ID @MT_ID_Bot",
-            "value": ""
-        },
-        "APPROVED_WELCOME": {
-            "description": "APPROVED_WELCOME On Or Off",
-            "value": "on"
-        },
-        "APPROVED_WELCOME_TEXT": {
-            "description": "APPROVED_WELCOME_TEXT : Welcome Text",
-            "value": "Hello {mention}\nWelcome To {title}\n\nYour Auto Approved"
-        }
-    },
+      }
+   },
    "keywords": [
       "telegram",
       "group",
       "manager",
       "bot"
-      "Auto",
-      "Approved",
-      "Group",
-      "Invite",
-      "Link",
-       "Bot"
    ],
    "logo": "https://telegra.ph/file/84b2017bc2f3c90f2e61c.jpg",
    "name": "GRAND OFFICIAL",
